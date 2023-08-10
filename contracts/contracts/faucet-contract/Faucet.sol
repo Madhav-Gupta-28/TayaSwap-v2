@@ -5,10 +5,11 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 
 
-contract Faucet is Ownable {
+contract Faucet is Ownable , ReentrancyGuard {
     IERC20 public token;
 
     using SafeMath for uint256;
@@ -26,7 +27,7 @@ contract Faucet is Ownable {
         token = IERC20(tokenAddress);
     }
 
-    function requestTokens() external {
+    function requestTokens() external nonReentrant {
         require(
             msg.sender != address(0),
            "Zero address is not allowed to request tokens"
