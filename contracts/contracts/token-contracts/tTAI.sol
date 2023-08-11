@@ -9,7 +9,7 @@ contract Token  is ERC20 {
     // the max total supply is 1000000 for TayaSwap Tokens
     uint256 public  maxTotalSupply = 1000000 * 10**18;
 
-    constructor(string memory name  , string memory symbol , uint256 maxSupply  ) ERC20(name, symbol){
+    constructor(uint256 maxSupply  ) ERC20("TAYA TAI Token", "tTAI"){
         maxTotalSupply = maxSupply;
         _mint(msg.sender, maxTotalSupply);
     }
